@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 08-python-for-devops-ingress
+spec:
+  rules:
+  - host: 08-python-for-devops.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 08-python-for-devops-service
+            port:
+              number: 80

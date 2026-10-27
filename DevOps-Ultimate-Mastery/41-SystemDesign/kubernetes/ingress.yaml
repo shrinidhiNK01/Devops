@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 41-systemdesign-ingress
+spec:
+  rules:
+  - host: 41-systemdesign.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 41-systemdesign-service
+            port:
+              number: 80

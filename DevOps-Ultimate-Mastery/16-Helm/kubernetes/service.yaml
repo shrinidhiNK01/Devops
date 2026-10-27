@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 16-helm-service
+spec:
+  selector:
+    app: 16-helm
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

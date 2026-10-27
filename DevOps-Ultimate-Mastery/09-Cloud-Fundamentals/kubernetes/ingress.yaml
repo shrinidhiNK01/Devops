@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 09-cloud-fundamentals-ingress
+spec:
+  rules:
+  - host: 09-cloud-fundamentals.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 09-cloud-fundamentals-service
+            port:
+              number: 80

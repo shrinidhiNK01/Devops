@@ -1,0 +1,11 @@
+name: Deploy 07-Bash-Scripting
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker
+      run: cd docker && docker build -t 07-bash-scripting .

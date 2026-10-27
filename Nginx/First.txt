@@ -1,0 +1,116 @@
+Nginx is a high-performance web server that
+delivers websites, handles requests, and
+can also work as a reverse proxy, load
+balancer, and caching tool to manage and
+scale web traffic efficiently.
+
+steps to run nginx:-
+========================
+aws -> ec2-instance -> allow http traffic and go without key value pair 
+go to that instance and connect -> it will open a linux terminal in cloud server 
+
+. Installing Nginx
+=====================
+· sudo yum install nginx ====> for amazon linux os
+o apt install nginx ====> for ubuntu linux os
+
+. Start Nginx service
+=======================
+sudo systemctl start nginx
+
+or
+
+sudo systemctl stop nginx
+
+or
+
+sudo systemctl reload nginx
+
+Status of Nginx
+===============
+sudo systemctl status nginx 
+
+· Enable HTTP service in firewalld
+====================================
+sudo dnf install firewalld
+sudo systemctl enable --now firewalld
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --reload
+
+· Access Default website from browser
+
+. Nginx config
+==========================================
+cd /etc/nginx/
+
+nginx.conf default structure :-
+==================================
+user;
+events{
+ 
+}
+http{
+    server{
+        location{} ==> listen 80; =>means at which port we have to listen user , root: /usr/share/nginx/html/example.com/;  =>where to divert it .
+    }
+}
+
+· Default webpage
+=======================
+cd /usr/share/nginx/html
+
+delete the existing webpage to create a new one:-
+========================================================
+sudo rm -rf *
+
+start making a new webpage:-
+================================
+sudo mkdir example.com
+cd example.com
+sudo vi index.html :- simple webpage
+===========================================
+<html>
+<body>
+<h1>Hi I am Back </h1>
+</body>
+</html>
+
+esc + :wq :- to comeback 
+
+cat index.html = to check the reality of webpage 
+then go to = cd /etc/nginx/
+ls 
+sudo cp nginx.conf nginx.conf_bkp
+
+now start making nginx.config from scratch:-
+=============================================
+delete current nginx.config = sudo rm nginx.conf
+start making = sudo vi nginx.conf  
+
+events{}
+http{
+    server{
+                listen  80;
+                root  /usr/share/nginx/html/example.com/;       
+    }
+}
+
+sudo nginx -t = test whether the nginx.conf created is corrected or not 
+sudo systemctl status nginx
+sudo systemctl reload nginx = reload the web page 
+
+About page inside the existing page
+=====================================
+sudo mkdir about , inside  /usr/share/nginx/html/example.com
+cd about 
+sudo cp ../index.html .
+sudo vi index.html  === write anything for about section in web page 
+
+changing default HTTP port
+===============================
+if u want to use any other port , other than 80 like 8080 , then go to aws instance -> security -> security groups -> inbound rules(rules for the requests entering to the applications) -> edit inbound rules -> add rule -> port range:- 8080 && source = anywhere IPV4 ->save rules 
+then, go to nginx.conf (cd /etc/nginx/) , thn change it to 80 <-> 8080
+then,
+sudo vi /etc/nginx/nginx.conf , there change 80 to 8080
+
+

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 16-helm-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 16-helm
+  template:
+    metadata:
+      labels:
+        app: 16-helm
+    spec:
+      containers:
+      - name: main-app
+        image: myregistry.com/16-helm:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

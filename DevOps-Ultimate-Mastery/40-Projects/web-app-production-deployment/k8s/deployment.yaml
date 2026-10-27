@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production-node-app
+  labels:
+    app: production-node-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: production-node-app
+  template:
+    metadata:
+      labels:
+        app: production-node-app
+    spec:
+      containers:
+      - name: web-app
+        image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/production-node-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: "rds-postgres-database.cluster.us-east-1.rds.amazonaws.com"
+        - name: DB_NAME
+          value: "prod_db"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "SecureDbPassword123!"
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5

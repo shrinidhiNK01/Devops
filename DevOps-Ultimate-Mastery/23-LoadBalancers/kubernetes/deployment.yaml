@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 23-loadbalancers-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 23-loadbalancers
+  template:
+    metadata:
+      labels:
+        app: 23-loadbalancers
+    spec:
+      containers:
+      - name: main-app
+        image: myregistry.com/23-loadbalancers:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

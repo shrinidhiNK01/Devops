@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 32-logging-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 32-logging
+  template:
+    metadata:
+      labels:
+        app: 32-logging
+    spec:
+      containers:
+      - name: main-app
+        image: myregistry.com/32-logging:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 07-bash-scripting-ingress
+spec:
+  rules:
+  - host: 07-bash-scripting.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 07-bash-scripting-service
+            port:
+              number: 80

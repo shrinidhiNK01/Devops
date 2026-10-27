@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 23-loadbalancers-ingress
+spec:
+  rules:
+  - host: 23-loadbalancers.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 23-loadbalancers-service
+            port:
+              number: 80

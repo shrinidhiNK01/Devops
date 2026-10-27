@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 13-virtualization-ingress
+spec:
+  rules:
+  - host: 13-virtualization.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 13-virtualization-service
+            port:
+              number: 80

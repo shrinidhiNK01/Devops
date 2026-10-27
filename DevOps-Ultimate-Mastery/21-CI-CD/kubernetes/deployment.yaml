@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 21-ci-cd-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 21-ci-cd
+  template:
+    metadata:
+      labels:
+        app: 21-ci-cd
+    spec:
+      containers:
+      - name: main-app
+        image: myregistry.com/21-ci-cd:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

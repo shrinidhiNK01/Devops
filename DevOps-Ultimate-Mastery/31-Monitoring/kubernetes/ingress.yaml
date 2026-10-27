@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 31-monitoring-ingress
+spec:
+  rules:
+  - host: 31-monitoring.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 31-monitoring-service
+            port:
+              number: 80

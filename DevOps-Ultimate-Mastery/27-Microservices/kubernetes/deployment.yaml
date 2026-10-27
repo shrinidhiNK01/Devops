@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 27-microservices-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 27-microservices
+  template:
+    metadata:
+      labels:
+        app: 27-microservices
+    spec:
+      containers:
+      - name: main-app
+        image: myregistry.com/27-microservices:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 18-ansible-ingress
+spec:
+  rules:
+  - host: 18-ansible.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 18-ansible-service
+            port:
+              number: 80

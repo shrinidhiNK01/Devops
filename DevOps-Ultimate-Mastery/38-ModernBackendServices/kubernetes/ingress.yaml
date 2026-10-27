@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 38-modernbackendservices-ingress
+spec:
+  rules:
+  - host: 38-modernbackendservices.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 38-modernbackendservices-service
+            port:
+              number: 80

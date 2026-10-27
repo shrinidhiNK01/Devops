@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 02-operating-systems-ingress
+spec:
+  rules:
+  - host: 02-operating-systems.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 02-operating-systems-service
+            port:
+              number: 80

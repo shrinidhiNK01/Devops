@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 31-monitoring-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 31-monitoring
+  template:
+    metadata:
+      labels:
+        app: 31-monitoring
+    spec:
+      containers:
+      - name: main-app
+        image: myregistry.com/31-monitoring:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

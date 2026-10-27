@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 25-kafka-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 25-kafka
+  template:
+    metadata:
+      labels:
+        app: 25-kafka
+    spec:
+      containers:
+      - name: main-app
+        image: myregistry.com/25-kafka:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

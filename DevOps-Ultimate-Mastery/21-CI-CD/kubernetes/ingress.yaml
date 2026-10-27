@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 21-ci-cd-ingress
+spec:
+  rules:
+  - host: 21-ci-cd.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 21-ci-cd-service
+            port:
+              number: 80

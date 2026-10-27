@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  redis-master:
+    image: redis:7.0-alpine
+    command: redis-server --appendonly yes --requirepass SecurePass123!
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - redis-net
+
+volumes:
+  redis-data:
+
+networks:
+  redis-net:
+    driver: bridge

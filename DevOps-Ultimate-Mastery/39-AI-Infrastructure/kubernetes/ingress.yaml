@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: 39-ai-infrastructure-ingress
+spec:
+  rules:
+  - host: 39-ai-infrastructure.enterprise.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: 39-ai-infrastructure-service
+            port:
+              number: 80

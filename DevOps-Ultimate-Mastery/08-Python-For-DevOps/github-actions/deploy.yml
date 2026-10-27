@@ -1,0 +1,11 @@
+name: Deploy 08-Python-For-DevOps
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker
+      run: cd docker && docker build -t 08-python-for-devops .
